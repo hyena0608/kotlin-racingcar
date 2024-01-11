@@ -49,8 +49,8 @@ class RacingTest {
     fun success_findWinners() {
         // given
         val car1 = Car(Name("1"))
-        val car2 = Car(Name("1"))
-        val car3 = Car(Name("1"))
+        val car2 = Car(Name("2"))
+        val car3 = Car(Name("3"))
 
         val racing = Racing(
             Cars(listOf(car1, car2, car3))
@@ -62,6 +62,6 @@ class RacingTest {
         val actual = racing.findWinners()
 
         // then
-        assertThat(actual.winnerNames).containsExactly(car1, car2, car3)
+        assertThat(actual.winnerNames).containsExactly("1", "2", "3")
     }
 }
