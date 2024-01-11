@@ -28,4 +28,20 @@ class CarTest {
         // then
         assertThat(actual.distance).isEqualTo(expected)
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = [-10, -5, 0, 1, 2, 3, 4, 5, 10])
+    fun success_isSameDistance(value: Int) {
+        // given
+        val car = Car(Name("자동차1"))
+
+        val moveDistance = Distance(value)
+        car.move(moveDistance)
+
+        // when
+        val actual = car.isSameDistance(moveDistance)
+
+        // then
+        assertThat(actual).isTrue()
+    }
 }
