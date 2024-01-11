@@ -1,25 +1,30 @@
 package racing
 
-import car.Car
 import car.Cars
-import car.Distance
-import car.Name
+import car.Movement
 
-data class Racing(
+class Racing(
     val cars: Cars,
-    var raceCount: Count = Count(0)
+    raceCount: Count = ZERO
 ) {
-    constructor(carNames: List<String>) : this(
-        Cars(
-            carNames.stream()
-                .map {
-                    Car(Name(it), Distance(0))
-                }.toList()
-        )
-    )
+    var raceCount: Count = raceCount
+        private set
 
-    fun race() {
-        cars.moveAll()
+    fun race(movement: Movement) {
+        cars.moveAll(movement)
         raceCount = raceCount.increase()
+    }
+
+    fun findWinners(): Winners {
+        return Winners(
+            collectCarNames()
+        )
+    }
+
+    private fun collectCarNames(): List<String> {
+        return cars.cars
+            .stream()
+            .map { it.name.value }
+            .toList()
     }
 }

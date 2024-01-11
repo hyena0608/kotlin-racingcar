@@ -1,5 +1,7 @@
 package racing
 
+val ZERO = Count(0)
+
 data class Count(val value: Int) {
     init {
         require(value >= 0) {
