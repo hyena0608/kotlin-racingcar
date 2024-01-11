@@ -28,4 +28,32 @@ class DistanceTest {
         // then
         assertThat(actual).isEqualTo(expected)
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5])
+    fun success_isSame_true(value: Int) {
+        // given
+        val distance = Distance(value)
+        val requestDistance = Distance(value)
+
+        // when
+        val actual = distance.isSame(requestDistance)
+
+        // then
+        assertThat(actual).isTrue()
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5])
+    fun success_isSame_false(value: Int) {
+        // given
+        val distance = Distance(value)
+        val requestDistance = Distance(value.plus(1))
+
+        // when
+        val actual = distance.isSame(requestDistance)
+
+        // then
+        assertThat(actual).isFalse()
+    }
 }
