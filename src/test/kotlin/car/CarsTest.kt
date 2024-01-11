@@ -1,11 +1,13 @@
 package car
 
+import car.stub.MovementDistanceOneStub
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatCode
 import org.junit.jupiter.api.Test
 
 class CarsTest {
 
-    private var movement: Movement = RandomMovement()
+    private var movement: Movement = MovementDistanceOneStub()
 
     @Test
     fun success_create() {
@@ -36,16 +38,18 @@ class CarsTest {
     }
 
     @Test
-    fun success_moveAllV2() {
+    fun success_findFurthestCars() {
         // given
-        val cars: Cars = Cars(
-            listOf(
-                Car(Name("자동차 1")),
-                Car(Name("자동차 2")),
-            )
+        val car1 = Car(Name("자동차 1"))
+        val car2 = Car(Name("자동차 2"))
+        val cars = Cars(
+            listOf(car1, car2)
         )
 
         // when
-        cars.moveAll(movement);
+        val actual = cars.findFurthestCars()
+
+        // then
+        assertThat(actual).containsExactly(car1, car2)
     }
 }
